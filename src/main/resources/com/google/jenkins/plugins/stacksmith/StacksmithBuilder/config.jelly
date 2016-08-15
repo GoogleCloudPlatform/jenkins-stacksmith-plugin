@@ -1,0 +1,61 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
+         xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form"
+	 xmlns:a="/lib/auth">
+ <f:invisibleEntry>
+  <f:readOnlyTextbox field="curOperatingSystemId" name="curOperatingSystemId"
+   value="${instance.getOperatingSystemRequirement().getId()}" />
+  <f:readOnlyTextbox field="curComponentId" name="curComponentId"
+   value="${instance.getComponentRequirement().getId()}" />
+  <f:readOnlyTextbox field="curFlavor" name="curFlavor"
+   value="${instance.getFlavor()}" />
+  <f:readOnlyTextbox field="curOperatingSystemVersionOperator"
+      name="curOperatingSystemVersionOperator"
+   value="${instance.getOperatingSystemRequirement().getVersionOperator().getApiString()}" />
+  <f:readOnlyTextbox field="curComponentVersionOperator"
+      name="curComponentVersionOperator"
+   value="${instance.getComponentRequirement().getVersionOperator().getApiString()}" />
+  <f:readOnlyTextbox field="curOperatingSystemVersion"
+      name="curOperatingSystemVersion"
+   value="${instance.getOperatingSystemRequirement().getVersionNumber()}" />
+  <f:readOnlyTextbox field="curComponentVersion"
+      name="curComponentVersion"
+   value="${instance.getComponentRequirement().getVersionNumber()}" />
+ </f:invisibleEntry>
+
+ <f:entry title="${%Operating System}">
+  <f:select field="operatingSystemId" />
+  <f:block>
+   <f:entry title="${%Version operator}">
+    <f:select field="operatingSystemVersionOperator" />
+   </f:entry>
+   <f:entry title="${%Version}">
+    <f:select field="operatingSystemVersion" />
+   </f:entry>
+  </f:block>
+ </f:entry>
+
+ <f:entry title="${%Component}">
+  <f:select field="componentId" />
+  <f:block>
+   <f:entry title="${%Version operator}">
+    <f:select field="componentVersionOperator" />
+   </f:entry>
+   <f:entry title="${%Version}">
+    <f:select field="componentVersion" />
+   </f:entry>
+  </f:block>
+ </f:entry>
+
+ <f:entry title="${%Flavor}">
+  <f:select field="flavor" />
+ </f:entry>
+
+ <f:entry>
+  <f:optionalBlock field="writeDockerfile" name="writeDockerfile"
+      title="${%Write Dockerfile}" inline="true" checked="${writeDockerfile}">
+   <f:entry title="${%Folder to write to}">
+    <f:textbox field="dockerfileDiskDirectory" default="$WORKSPACE/docker" />
+   </f:entry>
+  </f:optionalBlock>
+ </f:entry>
+</j:jelly>
